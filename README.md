@@ -75,5 +75,6 @@ To get the original verison of slam_karto running:
 - For sparse_bundle_adjustment we also need to install suitesparse (https://github.com/jluttine/suitesparse), for which we in turn need to install OpenBLAS (https://github.com/xianyi/OpenBLAS).  
 
 OpenBLAS:  
--- Test
-
+- Download the file from github, cd into the directory and run "make" to build the package.
+- Copy the files "libopenblas.so" and "libopenblas.so.0" from /opt/OpenBLAS/lib to usr/
+lib.
