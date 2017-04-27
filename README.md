@@ -91,5 +91,11 @@ spare_bundle_adjustment:
 
 Finally, build everything:  
 $ cd catkin_ws  
-$ catkin_make   
+$ catkin_make
+
+*****
+
+Launch the modified maze (maze3.world) and original slam_karto:  
+$ roslaunch asl_turtlebot turtlebot_maze_karto.launch  
+
 
