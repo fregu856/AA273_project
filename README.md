@@ -49,4 +49,21 @@ Run a test controller to check that everything is working:
 Place "test_controller.py" in ~/AA273/AA273_project/catkin_ws/src/turtlebot_control/scripts, make it executable and build the package.  
 $ roslaunch asl_turtlebot turtlebot_sim.launch  
 $ rosrun turtlebot_control test_controller.py (in another terminal)  
-The robot should now move to the coordinate (1, 1).    
+The robot should now move to the coordinate (1, 1). 
+
+*******
+
+Run the AA274 project code:  
+Create a directory called "launch" in catkin_ws/src/turtlebot_control  
+Place "AA274_project.launch" in catkin_ws/src/turtlebot_control/launch  
+$ roslaunch asl_turtlebot turtlebot_project_sim.launch  
+$ roslaunch turtlebot_control AA274_project.launch  
+$ rosrun turtlebot_control mission_publisher.py  
+
+Tele-op:  
+$ roslaunch kobuki_keyop keyop.launch  
+
+*****
+
+Launch the modified maze (maze3.world) and Gmapping:  
+$ roslaunch asl_turtlebot turtlebot_maze.launch
