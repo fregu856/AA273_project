@@ -76,8 +76,7 @@ To get the original verison of slam_karto running:
 
 OpenBLAS:  
 - Download the file from github, cd into the directory and run "sudo make" to build the package.
-- Copy the files "libopenblas.so" and "libopenblas.so.0" from /opt/OpenBLAS/lib to usr/
-lib (e.g. $ sudo cp libopenblas.so /usr/lib).  
+- Copy the files "libopenblas.so" and "libopenblas.so.0" from /opt/OpenBLAS/lib to usr/lib (e.g. $ sudo cp libopenblas.so /usr/lib).  
 
 SuiteSparse:  
 - Download the file from github, cd into the directory and run "sudo make" to build the package.
