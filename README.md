@@ -75,12 +75,12 @@ To get the original verison of slam_karto running:
 - For sparse_bundle_adjustment we also need to install SuiteSparse (https://github.com/jluttine/suitesparse), for which we in turn need to install OpenBLAS (https://github.com/xianyi/OpenBLAS).  
 
 OpenBLAS:  
-- Download the file from github, cd into the directory and run "$ sudo make" to build the package.
+- Download the file from github, cd into the directory and run "sudo make" to build the package.
 - Copy the files "libopenblas.so" and "libopenblas.so.0" from /opt/OpenBLAS/lib to usr/
 lib (e.g. $ sudo cp libopenblas.so /usr/lib).  
 
 SuiteSparse:  
-- Download the file from github, cd into the directory and run "$ sudo make" to build the package.
+- Download the file from github, cd into the directory and run "sudo make" to build the package.
 - Copy all files from suitesparse-master/include to /usr/include and all files from suitesparse-master/lib to /usr/lib:  
 $ cd Downloads/suitesparse-master  
 $ sudo cp -a include/. /usr/include  
