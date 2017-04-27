@@ -1,2 +1,2 @@
-asl_turtlebot:turtlebot_control
+asl_turtlebot:open_karto:slam_karto:sparse_bundle_adjustment:turtlebot_control
 -DCATKIN_DEVEL_PREFIX=/home/fregu856/AA273/AA273_project/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/fregu856/AA273/AA273_project/catkin_ws/install -G Unix Makefiles

@@ -2,4 +2,4 @@
 source_root_dir = "/home/fregu856/AA273/AA273_project/catkin_ws/src"
 whitelisted_packages = "".split(';') if "" != "" else []
 blacklisted_packages = "".split(';') if "" != "" else []
-underlay_workspaces = "/home/fregu856/AA273/AA273_project/catkin_ws/devel;/home/fregu856/catkin_ws/devel;/opt/ros/kinetic".split(';') if "/home/fregu856/AA273/AA273_project/catkin_ws/devel;/home/fregu856/catkin_ws/devel;/opt/ros/kinetic" != "" else []
+underlay_workspaces = "/home/fregu856/catkin_ws/devel;/opt/ros/kinetic".split(';') if "/home/fregu856/catkin_ws/devel;/opt/ros/kinetic" != "" else []

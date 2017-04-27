@@ -117,7 +117,10 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/fregu856/AA273/AA273_project/catkin_ws/build/gtest/cmake_install.cmake")
+  include("/home/fregu856/AA273/AA273_project/catkin_ws/build/open_karto/cmake_install.cmake")
+  include("/home/fregu856/AA273/AA273_project/catkin_ws/build/sparse_bundle_adjustment/cmake_install.cmake")
   include("/home/fregu856/AA273/AA273_project/catkin_ws/build/asl_turtlebot/cmake_install.cmake")
+  include("/home/fregu856/AA273/AA273_project/catkin_ws/build/slam_karto/cmake_install.cmake")
   include("/home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/cmake_install.cmake")
 
 endif()

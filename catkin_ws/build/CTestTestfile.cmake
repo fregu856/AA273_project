@@ -5,5 +5,8 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 subdirs(gtest)
+subdirs(open_karto)
+subdirs(sparse_bundle_adjustment)
 subdirs(asl_turtlebot)
+subdirs(slam_karto)
 subdirs(turtlebot_control)
