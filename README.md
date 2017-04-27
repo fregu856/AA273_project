@@ -71,5 +71,5 @@ $ roslaunch asl_turtlebot turtlebot_maze.launch
 **** 
 
 To get the original verison of slam_karto running:  
-Clone slam_karto (https://github.com/ros-perception/slam_karto), open_karto (https://github.com/ros-perception/open_karto) and sparse_bundle_adjustment (https://github.com/ros-perception/sparse_bundle_adjustment) to catkin_ws/src.  
+- Clone slam_karto (https://github.com/ros-perception/slam_karto), open_karto (https://github.com/ros-perception/open_karto) and sparse_bundle_adjustment (https://github.com/ros-perception/sparse_bundle_adjustment) to catkin_ws/src.  
 
