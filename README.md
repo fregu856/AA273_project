@@ -99,3 +99,9 @@ Launch the modified maze (maze3.world) and original slam_karto:
 $ roslaunch asl_turtlebot turtlebot_maze_karto.launch  
 
 
+****
+
+sudo apt-get install ros-kinetic-nav2d
+
+
+
