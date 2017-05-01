@@ -105,7 +105,7 @@ sudo apt-get install ros-kinetic-nav2d
 
 /opt/ros/kinetic/share/nav2d_tutorials/param  
 
-I have changes ros.yaml
+I have changes ros.yaml, mapper.yaml (in the above folder).
 
 
 
