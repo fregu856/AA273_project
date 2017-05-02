@@ -164,7 +164,7 @@ SlamKarto::SlamKarto() :
   bool use_scan_matching;
   if(private_nh_.getParam("use_scan_matching", use_scan_matching))
     mapper_->setParamUseScanMatching(use_scan_matching);
-  
+
   bool use_scan_barycenter;
   if(private_nh_.getParam("use_scan_barycenter", use_scan_barycenter))
     mapper_->setParamUseScanBarycenter(use_scan_barycenter);
@@ -330,6 +330,7 @@ SlamKarto::publishTransform()
 karto::LaserRangeFinder*
 SlamKarto::getLaser(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
+  // std::cout << lasers_.size() << '\n';
   // Check whether we know about this laser yet
   if(lasers_.find(scan->header.frame_id) == lasers_.end())
   {
@@ -386,7 +387,7 @@ SlamKarto::getLaser(const sensor_msgs::LaserScan::ConstPtr& scan)
     // Create a laser range finder device and copy in data from the first
     // scan
     std::string name = scan->header.frame_id;
-    karto::LaserRangeFinder* laser = 
+    karto::LaserRangeFinder* laser =
       karto::LaserRangeFinder::CreateLaserRangeFinder(karto::LaserRangeFinder_Custom, karto::Name(name));
     laser->SetOffsetPose(karto::Pose2(laser_pose.getOrigin().x(),
 				      laser_pose.getOrigin().y(),
@@ -427,7 +428,7 @@ SlamKarto::getOdomPose(karto::Pose2& karto_pose, const ros::Time& t)
   }
   double yaw = tf::getYaw(odom_pose.getRotation());
 
-  karto_pose = 
+  karto_pose =
           karto::Pose2(odom_pose.getOrigin().x(),
                        odom_pose.getOrigin().y(),
                        yaw);
@@ -437,6 +438,7 @@ SlamKarto::getOdomPose(karto::Pose2& karto_pose, const ros::Time& t)
 void
 SlamKarto::publishGraphVisualization()
 {
+  ROS_INFO("SlamKarto::publishGraphVisualization");
   std::vector<float> graph;
   solver_->getGraph(graph);
 
@@ -477,7 +479,7 @@ SlamKarto::publishGraphVisualization()
 
   m.action = visualization_msgs::Marker::ADD;
   uint id = 0;
-  for (uint i=0; i<graph.size()/2; i++) 
+  for (uint i=0; i<graph.size()/2; i++)
   {
     m.id = id;
     m.pose.position.x = graph[2*i];
@@ -504,7 +506,7 @@ SlamKarto::publishGraphVisualization()
   }
 
   m.action = visualization_msgs::Marker::DELETE;
-  for (; id < marker_count_; id++) 
+  for (; id < marker_count_; id++)
   {
     m.id = id;
     marray.markers.push_back(visualization_msgs::Marker(m));
@@ -537,14 +539,14 @@ SlamKarto::laserCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
   karto::Pose2 odom_pose;
   if(addScan(laser, scan, odom_pose))
   {
-    ROS_DEBUG("added scan at pose: %.3f %.3f %.3f", 
+    ROS_DEBUG("added scan at pose: %.3f %.3f %.3f",
               odom_pose.GetX(),
               odom_pose.GetY(),
               odom_pose.GetHeading());
 
     publishGraphVisualization();
 
-    if(!got_map_ || 
+    if(!got_map_ ||
        (scan->header.stamp - last_map_update) > map_update_interval_)
     {
       if(updateMap())
@@ -560,9 +562,10 @@ SlamKarto::laserCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 bool
 SlamKarto::updateMap()
 {
+  ROS_INFO("SlamKarto::updateMap");
   boost::mutex::scoped_lock lock(map_mutex_);
 
-  karto::OccupancyGrid* occ_grid = 
+  karto::OccupancyGrid* occ_grid =
           karto::OccupancyGrid::CreateFromScans(mapper_->GetAllProcessedScans(), resolution_);
 
   if(!occ_grid)
@@ -577,14 +580,14 @@ SlamKarto::updateMap()
     map_.map.info.origin.orientation.y = 0.0;
     map_.map.info.origin.orientation.z = 0.0;
     map_.map.info.origin.orientation.w = 1.0;
-  } 
+  }
 
   // Translate to ROS format
   kt_int32s width = occ_grid->GetWidth();
   kt_int32s height = occ_grid->GetHeight();
   karto::Vector2<kt_double> offset = occ_grid->GetCoordinateConverter()->GetOffset();
 
-  if(map_.map.info.width != (unsigned int) width || 
+  if(map_.map.info.width != (unsigned int) width ||
      map_.map.info.height != (unsigned int) height ||
      map_.map.info.origin.position.x != offset.GetX() ||
      map_.map.info.origin.position.y != offset.GetY())
@@ -598,7 +601,7 @@ SlamKarto::updateMap()
 
   for (kt_int32s y=0; y<height; y++)
   {
-    for (kt_int32s x=0; x<width; x++) 
+    for (kt_int32s x=0; x<width; x++)
     {
       // Getting the value at position x,y
       kt_int8u value = occ_grid->GetValue(karto::Vector2<kt_int32s>(x, y));
@@ -620,7 +623,7 @@ SlamKarto::updateMap()
       }
     }
   }
-  
+
   // Set the header information on the map
   map_.map.header.stamp = ros::Time::now();
   map_.map.header.frame_id = map_frame_;
@@ -635,15 +638,14 @@ SlamKarto::updateMap()
 
 bool
 SlamKarto::addScan(karto::LaserRangeFinder* laser,
-		   const sensor_msgs::LaserScan::ConstPtr& scan, 
+		   const sensor_msgs::LaserScan::ConstPtr& scan,
                    karto::Pose2& karto_pose)
 {
   if(!getOdomPose(karto_pose, scan->header.stamp))
      return false;
-  
-  // Create a vector of doubles for karto
-  std::vector<kt_double> readings;
 
+  // Create a vector of doubles for karto (with all range values for the scan):
+  std::vector<kt_double> readings;
   if (lasers_inverted_[scan->header.frame_id]) {
     for(std::vector<float>::const_reverse_iterator it = scan->ranges.rbegin();
       it != scan->ranges.rend();
@@ -659,9 +661,9 @@ SlamKarto::addScan(karto::LaserRangeFinder* laser,
       readings.push_back(*it);
     }
   }
-  
+
   // create localized range scan
-  karto::LocalizedRangeScan* range_scan = 
+  karto::LocalizedRangeScan* range_scan =
     new karto::LocalizedRangeScan(laser->GetName(), readings);
   range_scan->SetOdometricPose(karto_pose);
   range_scan->SetCorrectedPose(karto_pose);
@@ -671,7 +673,7 @@ SlamKarto::addScan(karto::LaserRangeFinder* laser,
   if((processed = mapper_->Process(range_scan)))
   {
     //std::cout << "Pose: " << range_scan->GetOdometricPose() << " Corrected Pose: " << range_scan->GetCorrectedPose() << std::endl;
-    
+
     karto::Pose2 corrected_pose = range_scan->GetCorrectedPose();
 
     // Compute the map->odom transform
@@ -703,10 +705,11 @@ SlamKarto::addScan(karto::LaserRangeFinder* laser,
   return processed;
 }
 
-bool 
+bool
 SlamKarto::mapCallback(nav_msgs::GetMap::Request  &req,
                        nav_msgs::GetMap::Response &res)
 {
+  ROS_INFO("SlamKarto::mapCallback");
   boost::mutex::scoped_lock lock(map_mutex_);
   if(got_map_ && map_.map.info.width && map_.map.info.height)
   {
@@ -717,8 +720,7 @@ SlamKarto::mapCallback(nav_msgs::GetMap::Request  &req,
     return false;
 }
 
-int
-main(int argc, char** argv)
+int main(int argc, char** argv)
 {
   ros::init(argc, argv, "slam_karto");
 

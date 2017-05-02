@@ -1,2 +1,2 @@
-asl_turtlebot:open_karto:slam_karto:sparse_bundle_adjustment:turtlebot_control
+asl_turtlebot:navigation_2d/nav2d:navigation_2d/nav2d_exploration:navigation_2d/nav2d_karto:navigation_2d/nav2d_localizer:navigation_2d/nav2d_msgs:navigation_2d/nav2d_navigator:navigation_2d/nav2d_operator:navigation_2d/nav2d_remote:navigation_2d/nav2d_tutorials:open_karto:slam_karto:sparse_bundle_adjustment:turtlebot_control
 -DCATKIN_DEVEL_PREFIX=/home/fregu856/AA273/AA273_project/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/fregu856/AA273/AA273_project/catkin_ws/install -G Unix Makefiles

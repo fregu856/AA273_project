@@ -617,7 +617,10 @@ namespace karto
      */
     inline Vertex<LocalizedRangeScan>* GetVertex(LocalizedRangeScan* pScan)
     {
-      return m_Vertices[pScan->GetSensorName()][pScan->GetStateId()];
+      std::cout << "Start of GetVertex\n";
+      Vertex<LocalizedRangeScan>* test = m_Vertices[pScan->GetSensorName()][pScan->GetStateId()];
+      std::cout << "End of GetVertex\n";
+      return test;
     }
 
     /**

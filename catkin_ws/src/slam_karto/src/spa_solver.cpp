@@ -32,7 +32,9 @@ SpaSolver::~SpaSolver()
 
 void SpaSolver::Clear()
 {
+  std::cout << "start of SpaSolver::Clear()\n";
   corrections.clear();
+  std::cout << "SpaSolver::Clear() is done!\n";
 }
 
 const karto::ScanSolver::IdPoseVector& SpaSolver::GetCorrections() const
@@ -55,6 +57,8 @@ void SpaSolver::Compute()
     karto::Pose2 pose(iter->trans(0), iter->trans(1), iter->arot);
     corrections.push_back(std::make_pair(iter->nodeId, pose));
   }
+
+  ROS_INFO("SpaSolver::Compute is done!");
 }
 
 void SpaSolver::AddNode(karto::Vertex<karto::LocalizedRangeScan>* pVertex)

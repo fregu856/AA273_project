@@ -91,6 +91,8 @@ open_karto/Karto.h
 /home/fregu856/AA273/AA273_project/catkin_ws/src/open_karto/src/open_karto/Karto.h
 
 /home/fregu856/AA273/AA273_project/catkin_ws/src/open_karto/src/Mapper.cpp
+iostream
+-
 sstream
 -
 fstream

@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <iostream>
 #include <sstream>
 #include <fstream>
 #include <stdexcept>
@@ -1046,6 +1047,7 @@ namespace karto
      */
     virtual std::vector<T*> Traverse(Vertex<T>* pStartVertex, Visitor<T>* pVisitor)
     {
+      std::cout << "Start of Traverse\n";
       std::queue<Vertex<T>*> toVisit;
       std::set<Vertex<T>*> seenVertices;
       std::vector<Vertex<T>*> validVertices;
@@ -1063,7 +1065,9 @@ namespace karto
           // vertex is valid, explore neighbors
           validVertices.push_back(pNext);
 
+          std::cout << "Before GetAdjacentVertices in Traverse\n";
           std::vector<Vertex<T>*> adjacentVertices = pNext->GetAdjacentVertices();
+          std::cout << "After GetAdjacentVertices in Traverse\n";
           forEach(typename std::vector<Vertex<T>*>, &adjacentVertices)
           {
             Vertex<T>* pAdjacent = *iter;
@@ -1081,9 +1085,11 @@ namespace karto
       std::vector<T*> objects;
       forEach(typename std::vector<Vertex<T>*>, &validVertices)
       {
+        std::cout << "Before push_back in Traverse\n";
         objects.push_back((*iter)->GetObject());
+        std::cout << "After push_back in Traverse\n";
       }
-
+      std::cout << "End of Traverse\n";
       return objects;
     }
   };  // class BreadthFirstTraversal
@@ -1275,15 +1281,22 @@ namespace karto
 
           pScan->SetSensorPose(bestPose);
           LinkChainToScan(candidateChain, pScan, bestPose, covariance);
+          std::cout << "Before CorrectPoses() in MapperGraph::TryCloseLoop\n";
           CorrectPoses();
+          std::cout << "After CorrectPoses() in MapperGraph::TryCloseLoop\n";
 
+
+          std::cout << "Before FireEndLoopClosure in MapperGraph::TryCloseLoop\n";
           m_pMapper->FireEndLoopClosure("Loop closed!");
 
           loopClosed = true;
+          std::cout << "After FireEndLoopClosure in MapperGraph::TryCloseLoop\n";
         }
       }
 
+      std::cout << "Before FindPossibleLoopClosure in MapperGraph::TryCloseLoop\n";
       candidateChain = FindPossibleLoopClosure(pScan, rSensorName, scanIndex);
+      std::cout << "After FindPossibleLoopClosure in MapperGraph::TryCloseLoop\n";
     }
 
     return loopClosed;
@@ -1496,8 +1509,14 @@ namespace karto
 
   LocalizedRangeScanVector MapperGraph::FindNearLinkedScans(LocalizedRangeScan* pScan, kt_double maxDistance)
   {
+    std::cout << "Before NearScanVisitor in MapperGraph::FindNearLinkedScans\n";
     NearScanVisitor* pVisitor = new NearScanVisitor(pScan, maxDistance, m_pMapper->m_pUseScanBarycenter->GetValue());
+    std::cout << "After NearScanVisitor in MapperGraph::FindNearLinkedScans\n";
+
+    std::cout << "Before Traverse in MapperGraph::FindNearLinkedScans\n";
     LocalizedRangeScanVector nearLinkedScans = m_pTraversal->Traverse(GetVertex(pScan), pVisitor);
+    std::cout << "After Traverse in MapperGraph::FindNearLinkedScans\n";
+
     delete pVisitor;
 
     return nearLinkedScans;
@@ -1553,12 +1572,16 @@ namespace karto
   {
     LocalizedRangeScanVector chain;  // return value
 
+    std::cout << "Before GetReferencePose in MapperGraph::FindPossibleLoopClosure\n";
     Pose2 pose = pScan->GetReferencePose(m_pMapper->m_pUseScanBarycenter->GetValue());
+    std::cout << "After GetReferencePose in MapperGraph::FindPossibleLoopClosure\n";
 
     // possible loop closure chain should not include close scans that have a
     // path of links to the scan of interest
+    std::cout << "Before FindNearLinkedScans in MapperGraph::FindPossibleLoopClosure\n";
     const LocalizedRangeScanVector nearLinkedScans =
           FindNearLinkedScans(pScan, m_pMapper->m_pLoopSearchMaximumDistance->GetValue());
+    std::cout << "After FindNearLinkedScans in MapperGraph::FindPossibleLoopClosure\n";
 
     kt_int32u nScans = static_cast<kt_int32u>(m_pMapper->m_pMapperSensorManager->GetScans(rSensorName).size());
     for (; rStartNum < nScans; rStartNum++)
@@ -1603,14 +1626,18 @@ namespace karto
     ScanSolver* pSolver = m_pMapper->m_pScanOptimizer;
     if (pSolver != NULL)
     {
+      std::cout << "pSolver->Compute() in Mapper.cpp\n";
       pSolver->Compute();
+      std::cout << "pSolver->Compute() in Mapper.cpp is done.\n";
 
       const_forEach(ScanSolver::IdPoseVector, &pSolver->GetCorrections())
       {
         m_pMapper->m_pMapperSensorManager->GetScan(iter->first)->SetSensorPose(iter->second);
       }
 
+      std::cout << "before pSolver->Clear() in MapperGraph::CorrectPoses()\n";
       pSolver->Clear();
+      std::cout << "MapperGraph::CorrectPoses() is done!\n";
     }
   }
 
@@ -2255,6 +2282,7 @@ namespace karto
           const_forEach(std::vector<Name>, &deviceNames)
           {
             m_pGraph->TryCloseLoop(pScan, *iter);
+            std::cout << "m_pGraph->TryCloseLoop is done!\n";
           }
         }
       }
