@@ -42,6 +42,7 @@ const karto::ScanSolver::IdPoseVector& SpaSolver::GetCorrections() const
 
 void SpaSolver::Compute()
 {
+	std::cout << "Start of SpaSolver::Compute in SpaSolver.cpp\n";
 	corrections.Clear();
 	typedef std::vector<Node2d, Eigen::aligned_allocator<Node2d> > NodeVector;
 
@@ -55,6 +56,7 @@ void SpaSolver::Compute()
 		corrections.Add(karto::Pair<int, karto::Pose2>(iter->nodeId, pose));
 	}
 	mLastSPA = ros::Time::now();
+	std::cout << "End of SpaSolver::Compute in SpaSolver.cpp\n";
 }
 
 void SpaSolver::reCompute()

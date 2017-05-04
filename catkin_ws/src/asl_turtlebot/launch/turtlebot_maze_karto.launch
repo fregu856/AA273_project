@@ -44,7 +44,7 @@
   </node>
 
 	<!-- Start Mapper to genreate map from laser scans -->
-	<node name="Mapper" pkg="nav2d_karto" type="mapper" launch-prefix="gdb -ex run --args">
+	<node name="Mapper" pkg="nav2d_karto" type="mapper" output="screen" launch-prefix="gdb -ex run --args">
 		<rosparam file="$(find nav2d_tutorials)/param/mapper.yaml"/>
 	</node>
 

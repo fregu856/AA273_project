@@ -57,6 +57,22 @@ Visualization Manager:
       Topic: /map
       Unreliable: false
       Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /Mapper/vertices
+      Name: PoseGraph:Nodes
+      Namespaces:
+        "": true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /Mapper/edges
+      Name: PoseGraph:Edges
+      Namespaces:
+        "": true
+      Queue Size: 100
+      Value: true
     - Class: rviz/TF
       Enabled: true
       Frame Timeout: 15
