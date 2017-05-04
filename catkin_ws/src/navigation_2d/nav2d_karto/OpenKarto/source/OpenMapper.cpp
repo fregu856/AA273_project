@@ -1555,7 +1555,7 @@ namespace karto
 
     kt_int32u scanIndex = 0;
 
-    CorrectPoses();
+    //CorrectPoses();
 
     LocalizedLaserScanList candidateChain = FindPossibleLoopClosure(pScan, rSensorName, scanIndex);
 
@@ -1619,6 +1619,11 @@ namespace karto
         }
         else
         {
+          std::cout << "************************\n";
+          std::cout << "************************\n";
+          std::cout << "CLOSING LOOP!\n";
+          std::cout << "************************\n";
+          std::cout << "************************\n";
           MapperEventArguments eventArguments1("Closing loop...");
           m_pOpenMapper->PreLoopClosed.Notify(this, eventArguments1);
 
