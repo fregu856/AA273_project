@@ -108,7 +108,7 @@ sudo apt-get install ros-kinetic-nav2d
 I have changes ros.yaml, mapper.yaml (in the above folder).  
 
 Being able to run Matlab scripts from python:  
-Install the matlan engine for python:  
+Install the Matlab engine for python:  
 $ cd /usr/local/MATLAB/R2017a/extern/engines/python  
 $ sudo python setup.py install  
 
