@@ -5,6 +5,7 @@
 laser_frame: hokuyo_link
 robot_frame: base_footprint
 odometry_frame: odom
+offset_frame: offset
 map_frame: map
 
 ### ROS topics ############################################
