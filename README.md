@@ -112,5 +112,10 @@ Install the Matlab engine for python (https://www.mathworks.com/help/matlab/matl
 $ cd /usr/local/MATLAB/R2017a/extern/engines/python  
 $ sudo python setup.py install  
 
+Running the file test.cc:  
+$ g++ test.cc -o test  
+$ ./test  
+
+
 
 
