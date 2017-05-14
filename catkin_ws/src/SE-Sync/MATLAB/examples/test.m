@@ -10,11 +10,11 @@ close all;
 clc;
 
 %% Import SE-Sync
-run('../import_SE_Sync.m');  % It's that easy :-)!
+run('/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/MATLAB/import_SE_Sync.m');  % It's that easy :-)!
 
 
 %% Select dataset to run
-data_dir = '../../data/';  % Relative path to directory containing example datasets
+data_dir = '/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/data/'  % Relative path to directory containing example datasets
 
 % 3D datasets
 sphere2500 = 'sphere2500';
@@ -82,14 +82,21 @@ Y0 = vertcat(R, zeros(SE_Sync_opts.r0 - d, num_poses*d));
 % Use default settings for everything
 %[SDPval, Yopt, xhat, Fxhat, se_sync_info, problem_data] = SE_Sync(measurements);
 
-%% Plot resulting solution
-plot_loop_closures = true;
-
-if plot_loop_closures
-    plot_poses(xhat.t, xhat.R, measurements.edges, '-b', .25);
-else
-    plot_poses(xhat.t, xhat.R);
+thetas = zeros(length(xhat.t), 1);
+for i = 1:length(xhat.t)
+    R = xhat.R(:, 2*(i-1)+1:2*(i-1)+2);
+    cos_th = R(1,1);
+    sin_th = R(2,1);
+    theta = atan2(sin_th, cos_th);
+    thetas(i) = theta;
 end
-axis tight;
 
-%view(90, -90);  % For plotting 3D but nearly-planar datasets
+poses = zeros(3, length(xhat.t));
+poses(1:2, :) = xhat.t;
+poses(3,:) = thetas;
+
+fileID = fopen('test.txt','w');
+fprintf(fileID,'%12.8f %12.8f %12.8f\n', poses);
+fclose(fileID);
+
+% each line in test.txt is x y theta

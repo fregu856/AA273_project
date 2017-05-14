@@ -19,6 +19,10 @@
 
 #include <nav2d_karto/SpaSolver.h>
 
+#include <iostream>
+#include <fstream>
+#include <stdlib.h>
+
 SpaSolver::SpaSolver()
 {
 //	m_Spa.verbose = true;
@@ -57,6 +61,10 @@ void SpaSolver::Compute()
 	}
 	mLastSPA = ros::Time::now();
 	std::cout << "End of SpaSolver::Compute in SpaSolver.cpp\n";
+
+
+	system("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/MATLAB/examples/test.sh");
+  std::cout << "After Matlab\n";
 }
 
 void SpaSolver::reCompute()
@@ -71,6 +79,15 @@ void SpaSolver::AddNode(karto::Vertex<karto::LocalizedObjectPtr>* pVertex)
 	karto::Pose2 pose = pVertex->GetVertexObject()->GetCorrectedPose();
 	Eigen::Vector3d vector(pose.GetX(), pose.GetY(), pose.GetHeading());
 	m_Spa.addNode(vector, pVertex->GetVertexObject()->GetUniqueId());
+
+ 	////////// MODIFIED START
+	std::ofstream graph_file;
+  graph_file.open ("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/data/graph.g2o", std::ios_base::app);
+  graph_file << "VERTEX_SE2" << " " << pVertex->GetVertexObject()->GetUniqueId();
+	graph_file << " " << pose.GetX() << " " << pose.GetY() << " ";
+	graph_file << pose.GetHeading() << "\n";
+  graph_file.close();
+	////////// MODIFIED END
 }
 
 void SpaSolver::AddConstraint(karto::Edge<karto::LocalizedObjectPtr>* pEdge)
@@ -92,4 +109,15 @@ void SpaSolver::AddConstraint(karto::Edge<karto::LocalizedObjectPtr>* pEdge)
 	m(2,2) = precisionMatrix(2,2);
 
 	m_Spa.addConstraint(pSource->GetUniqueId(), pTarget->GetUniqueId(), mean, m);
+
+	////////// MODIFIED START
+	std::ofstream graph_file;
+  graph_file.open ("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/data/graph.g2o", std::ios_base::app);
+  graph_file << "EDGE_SE2" << " " << pSource->GetUniqueId();
+	graph_file << " " << pTarget->GetUniqueId() << " " << diff.GetX() << " ";
+	graph_file << diff.GetY() << " " << diff.GetHeading() << " ";
+	graph_file << m(0,0) << " " << m(0,1) << " " << m(0,2) << " " << m(1,1);
+	graph_file << " " << m(1,2) << " " << m(2,2) << "\n";
+  graph_file.close();
+	////////// MODIFIED END
 }
