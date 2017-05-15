@@ -63,8 +63,8 @@ void SpaSolver::Compute()
 	std::cout << "End of SpaSolver::Compute in SpaSolver.cpp\n";
 
 
-	system("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/MATLAB/examples/test.sh");
-  std::cout << "After Matlab\n";
+	//system("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/MATLAB/examples/test.sh");
+  //std::cout << "After Matlab\n";
 }
 
 void SpaSolver::reCompute()

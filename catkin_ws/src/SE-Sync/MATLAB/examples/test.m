@@ -33,7 +33,7 @@ ais = 'ais2klinik';
 
 
 % Pick the dataset to run here
-file = intel;
+file = 'graph2';
 
 g2o_file = strcat(data_dir, file, '.g2o');
 
@@ -82,6 +82,17 @@ Y0 = vertcat(R, zeros(SE_Sync_opts.r0 - d, num_poses*d));
 % Use default settings for everything
 %[SDPval, Yopt, xhat, Fxhat, se_sync_info, problem_data] = SE_Sync(measurements);
 
+D = 2;
+
+t_hat = xhat.t;
+Rhat = xhat.R;
+
+% 'Unrotate' these vectors by premultiplying by the inverse of the first
+% orientation estimate
+t_hat_rotated = Rhat(1:D, 1:D)' * t_hat;
+% Translate the resulting vectors to the origin
+t_hat_anchored = t_hat_rotated - repmat(t_hat_rotated(:, 1), 1, size(t_hat_rotated, 2));
+
 thetas = zeros(length(xhat.t), 1);
 for i = 1:length(xhat.t)
     R = xhat.R(:, 2*(i-1)+1:2*(i-1)+2);
@@ -91,12 +102,14 @@ for i = 1:length(xhat.t)
     thetas(i) = theta;
 end
 
+thetas_anchored = thetas - thetas(1);
+
 poses = zeros(3, length(xhat.t));
 poses(1:2, :) = xhat.t;
 poses(3,:) = thetas;
 
 fileID = fopen('test.txt','w');
-fprintf(fileID,'%12.8f %12.8f %12.8f\n', poses);
+fprintf(fileID,'%12.12f %12.12f %12.12f\n', poses);
 fclose(fileID);
 
 % each line in test.txt is x y theta
