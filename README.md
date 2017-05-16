@@ -116,6 +116,18 @@ Running the file test.cc:
 $ g++ test.cc -o test  
 $ ./test  
 
+****
+
+Adding C++ node in (e.g.) turtlebot_control:  
+- Place optimizer.cpp in turtlebot_control/src  
+- Add the following lines to the bottom of CMakeLists.txt:  
+include_directories(  
+  ${catkin_INCLUDE_DIRS}  
+)  
+add_executable(optimizer src/optimizer.cpp)  
+target_link_libraries(optimizer ${catkin_LIBRARIES})  
+- catkin_make  
+(then you can run it by "rosrun turtlebot_control optimizer")  
 
 
 
