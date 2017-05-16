@@ -33,7 +33,7 @@ ais = 'ais2klinik';
 
 
 % Pick the dataset to run here
-file = 'graph2';
+file = 'graph';
 
 g2o_file = strcat(data_dir, file, '.g2o');
 

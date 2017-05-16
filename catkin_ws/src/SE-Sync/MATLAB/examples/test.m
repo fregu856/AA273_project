@@ -33,7 +33,7 @@ ais = 'ais2klinik';
 
 
 % Pick the dataset to run here
-file = 'graph2';
+file = 'graph';
 
 g2o_file = strcat(data_dir, file, '.g2o');
 
@@ -104,11 +104,11 @@ end
 
 thetas_anchored = thetas - thetas(1);
 
-poses = zeros(3, length(xhat.t));
-poses(1:2, :) = xhat.t;
-poses(3,:) = thetas;
+poses = zeros(3, length(t_hat_anchored));
+poses(1:2, :) = t_hat_anchored;
+poses(3,:) = thetas_anchored;
 
-fileID = fopen('test.txt','w');
+fileID = fopen('/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/MATLAB/examples/test.txt','w');
 fprintf(fileID,'%12.12f %12.12f %12.12f\n', poses);
 fclose(fileID);
 

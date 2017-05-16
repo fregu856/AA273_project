@@ -162,10 +162,11 @@
 /home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/CMakeFiles/list_install_components.dir
 /home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/CMakeFiles/install.dir
 /home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/CMakeFiles/rebuild_cache.dir
+/home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/CMakeFiles/edit_cache.dir
+/home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/CMakeFiles/optimizer.dir
 /home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/CMakeFiles/install/strip.dir
 /home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/CMakeFiles/install/local.dir
 /home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/CMakeFiles/test.dir
-/home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/CMakeFiles/edit_cache.dir
 /home/fregu856/AA273/AA273_project/catkin_ws/build/navigation_2d/nav2d_operator/CMakeFiles/install.dir
 /home/fregu856/AA273/AA273_project/catkin_ws/build/navigation_2d/nav2d_operator/CMakeFiles/rebuild_cache.dir
 /home/fregu856/AA273/AA273_project/catkin_ws/build/navigation_2d/nav2d_operator/CMakeFiles/edit_cache.dir

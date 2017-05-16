@@ -46,31 +46,51 @@ const karto::ScanSolver::IdPoseVector& SpaSolver::GetCorrections() const
 
 void SpaSolver::Compute()
 {
-	std::cout << "Start of SpaSolver::Compute in SpaSolver.cpp\n";
-	corrections.Clear();
-	typedef std::vector<Node2d, Eigen::aligned_allocator<Node2d> > NodeVector;
-
-	ROS_INFO("Calling doSPA for loop closure");
-	m_Spa.doSPA(40);
-	ROS_INFO("Finished doSPA for loop closure");
-	NodeVector nodes = m_Spa.getNodes();
-	forEach(NodeVector, &nodes)
+	ros::Duration d = ros::Time::now() - mLastSPA;
+	if(d.toSec() > 5)
 	{
-		karto::Pose2 pose(iter->trans(0), iter->trans(1), iter->arot);
-		corrections.Add(karto::Pair<int, karto::Pose2>(iter->nodeId, pose));
+		std::cout << "Start of SpaSolver::Compute in SpaSolver.cpp\n";
+		corrections.Clear();
+		// typedef std::vector<Node2d, Eigen::aligned_allocator<Node2d> > NodeVector;
+		//
+		// ROS_INFO("Calling doSPA for loop closure");
+		// m_Spa.doSPA(40);
+		// ROS_INFO("Finished doSPA for loop closure");
+		// NodeVector nodes = m_Spa.getNodes();
+		// forEach(NodeVector, &nodes)
+		// {
+		// 	karto::Pose2 pose(iter->trans(0), iter->trans(1), iter->arot);
+		// 	corrections.Add(karto::Pair<int, karto::Pose2>(iter->nodeId, pose));
+		// }
+		// mLastSPA = ros::Time::now();
+		// std::cout << "End of SpaSolver::Compute in SpaSolver.cpp\n";
+
+
+		////////// MODIFIED START
+		// move this part to a seperate file?
+		//system("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/MATLAB/examples/test.sh");
+	  //std::cout << "Optimal solution computed\n";
+		//
+
+		std::ifstream infile("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/MATLAB/examples/test.txt");
+	  long double x, y, theta;
+	  int id = 0;
+	  while (infile >> x >> y >> theta)
+	  {
+			karto::Pose2 pose(x, y, theta);
+			corrections.Add(karto::Pair<int, karto::Pose2>(id, pose));
+	  }
+
+		mLastSPA = ros::Time::now();
+		std::cout << "End of SpaSolver::Compute in SpaSolver.cpp\n";
+		////////// MODIFIED END
 	}
-	mLastSPA = ros::Time::now();
-	std::cout << "End of SpaSolver::Compute in SpaSolver.cpp\n";
-
-
-	//system("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/MATLAB/examples/test.sh");
-  //std::cout << "After Matlab\n";
 }
 
 void SpaSolver::reCompute()
 {
 	ros::Duration d = ros::Time::now() - mLastSPA;
-	if(d.toSec() > 60)
+	if(d.toSec() > 15)
 		Compute();
 }
 

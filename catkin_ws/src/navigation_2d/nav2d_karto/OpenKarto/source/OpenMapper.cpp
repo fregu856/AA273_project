@@ -1555,7 +1555,7 @@ namespace karto
 
     kt_int32u scanIndex = 0;
 
-    //CorrectPoses();
+    CorrectPoses();
 
     LocalizedLaserScanList candidateChain = FindPossibleLoopClosure(pScan, rSensorName, scanIndex);
 
@@ -2148,7 +2148,7 @@ namespace karto
 
   void MapperGraph::CorrectPoses()
   {
-    std::cout << "Start of MapperGraph::CorrectPoses in OpenMapper.cpp\n";
+    //std::cout << "Start of MapperGraph::CorrectPoses in OpenMapper.cpp\n";
     // optimize scans!
     ScanSolver* pSolver = m_pOpenMapper->m_pScanSolver;
     if (pSolver != NULL)
@@ -2172,7 +2172,7 @@ namespace karto
 
       pSolver->Clear();
     }
-    std::cout << "End of MapperGraph::CorrectPoses in OpenMapper.cpp\n";
+    //std::cout << "End of MapperGraph::CorrectPoses in OpenMapper.cpp\n";
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////

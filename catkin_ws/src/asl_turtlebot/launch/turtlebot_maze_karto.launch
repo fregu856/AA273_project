@@ -1,7 +1,7 @@
 <launch>
 	<rosparam file="$(find nav2d_tutorials)/param/ros.yaml"/>
 
-  <arg name="world_file"  default="$(find asl_turtlebot)/world/maze3.world"/>
+  <arg name="world_file"  default="$(find asl_turtlebot)/world/maze4.world"/>
 
   <arg name="base"      value="kobuki"/> <!-- create, roomba -->
   <arg name="battery"   value="/proc/acpi/battery/BAT0"/>  <!-- /proc/acpi/battery/BAT0 -->

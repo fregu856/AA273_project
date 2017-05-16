@@ -89,6 +89,17 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -122,17 +133,6 @@ test/fast: test
 
 .PHONY : test/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # The main all target
 all: cmake_check_build_system
 	cd /home/fregu856/AA273/AA273_project/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/AA273/AA273_project/catkin_ws/build/CMakeFiles /home/fregu856/AA273/AA273_project/catkin_ws/build/turtlebot_control/CMakeFiles/progress.marks
@@ -165,6 +165,48 @@ depend:
 	cd /home/fregu856/AA273/AA273_project/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
+# Convenience name for target.
+turtlebot_control/CMakeFiles/optimizer.dir/rule:
+	cd /home/fregu856/AA273/AA273_project/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtlebot_control/CMakeFiles/optimizer.dir/rule
+.PHONY : turtlebot_control/CMakeFiles/optimizer.dir/rule
+
+# Convenience name for target.
+optimizer: turtlebot_control/CMakeFiles/optimizer.dir/rule
+
+.PHONY : optimizer
+
+# fast build rule for target.
+optimizer/fast:
+	cd /home/fregu856/AA273/AA273_project/catkin_ws/build && $(MAKE) -f turtlebot_control/CMakeFiles/optimizer.dir/build.make turtlebot_control/CMakeFiles/optimizer.dir/build
+.PHONY : optimizer/fast
+
+src/optimizer.o: src/optimizer.cpp.o
+
+.PHONY : src/optimizer.o
+
+# target to build an object file
+src/optimizer.cpp.o:
+	cd /home/fregu856/AA273/AA273_project/catkin_ws/build && $(MAKE) -f turtlebot_control/CMakeFiles/optimizer.dir/build.make turtlebot_control/CMakeFiles/optimizer.dir/src/optimizer.cpp.o
+.PHONY : src/optimizer.cpp.o
+
+src/optimizer.i: src/optimizer.cpp.i
+
+.PHONY : src/optimizer.i
+
+# target to preprocess a source file
+src/optimizer.cpp.i:
+	cd /home/fregu856/AA273/AA273_project/catkin_ws/build && $(MAKE) -f turtlebot_control/CMakeFiles/optimizer.dir/build.make turtlebot_control/CMakeFiles/optimizer.dir/src/optimizer.cpp.i
+.PHONY : src/optimizer.cpp.i
+
+src/optimizer.s: src/optimizer.cpp.s
+
+.PHONY : src/optimizer.s
+
+# target to generate assembly for a file
+src/optimizer.cpp.s:
+	cd /home/fregu856/AA273/AA273_project/catkin_ws/build && $(MAKE) -f turtlebot_control/CMakeFiles/optimizer.dir/build.make turtlebot_control/CMakeFiles/optimizer.dir/src/optimizer.cpp.s
+.PHONY : src/optimizer.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -174,10 +216,14 @@ help:
 	@echo "... list_install_components"
 	@echo "... install"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
+	@echo "... optimizer"
 	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... test"
-	@echo "... edit_cache"
+	@echo "... src/optimizer.o"
+	@echo "... src/optimizer.i"
+	@echo "... src/optimizer.s"
 .PHONY : help
 
 

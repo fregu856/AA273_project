@@ -1258,6 +1258,19 @@ slam_karto/fast:
 .PHONY : slam_karto/fast
 
 #=============================================================================
+# Target rules for targets named optimizer
+
+# Build rule for target.
+optimizer: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 optimizer
+.PHONY : optimizer
+
+# fast build rule for target.
+optimizer/fast:
+	$(MAKE) -f turtlebot_control/CMakeFiles/optimizer.dir/build.make turtlebot_control/CMakeFiles/optimizer.dir/build
+.PHONY : optimizer/fast
+
+#=============================================================================
 # Target rules for targets named RobotOperator
 
 # Build rule for target.
@@ -2667,6 +2680,7 @@ help:
 	@echo "... OpenKarto"
 	@echo "... mapper"
 	@echo "... slam_karto"
+	@echo "... optimizer"
 	@echo "... RobotOperator"
 	@echo "... nav2d_operator_genpy"
 	@echo "... nav2d_operator_generate_messages_py"

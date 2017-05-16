@@ -57,9 +57,8 @@ private:
 	karto::ScanSolver::IdPoseVector corrections;
 
 	SysSPA2d m_Spa;
-	
+
 	ros::Time mLastSPA;
 };
 
 #endif // KARTO_SPASOLVER_H
-
