@@ -1,5 +1,5 @@
 <launch>
-  <arg name="world_file"  default="$(find asl_turtlebot)/world/maze3.world"/>
+  <arg name="world_file"  default="$(find asl_turtlebot)/world/maze5.world"/>
 
   <arg name="base"      value="kobuki"/> <!-- create, roomba -->
   <arg name="battery"   value="/proc/acpi/battery/BAT0"/>  <!-- /proc/acpi/battery/BAT0 -->

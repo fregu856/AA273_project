@@ -1603,25 +1603,20 @@
           <ray>
             <scan>
               <horizontal>
-                <samples>720</samples>
+                <samples>360</samples>
                 <resolution>1</resolution>
-                <min_angle>-1.5708</min_angle>
-                <max_angle>1.5708</max_angle>
+                <min_angle>0.0</min_angle>
+                <max_angle>6.28</max_angle>
               </horizontal>
-              <vertical>
-                <samples>1</samples>
-                <min_angle>0</min_angle>
-                <max_angle>0</max_angle>
-              </vertical>
             </scan>
             <range>
-              <min>0.1</min>
-              <max>30</max>
-              <resolution>0.01</resolution>
+              <min>0.120</min>
+              <max>3.5</max>
+              <resolution>0.015</resolution>
             </range>
             <noise>
               <type>gaussian</type>
-              <mean>0</mean>
+              <mean>0.0</mean>
               <stddev>0.01</stddev>
             </noise>
           </ray>

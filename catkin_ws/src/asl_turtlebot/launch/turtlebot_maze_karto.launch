@@ -1,7 +1,7 @@
 <launch>
 	<rosparam file="$(find nav2d_tutorials)/param/ros.yaml"/>
 
-  <arg name="world_file"  default="$(find asl_turtlebot)/world/maze4.world"/>
+  <arg name="world_file"  default="$(find asl_turtlebot)/world/maze5.world"/>
 
   <arg name="base"      value="kobuki"/> <!-- create, roomba -->
   <arg name="battery"   value="/proc/acpi/battery/BAT0"/>  <!-- /proc/acpi/battery/BAT0 -->
@@ -21,7 +21,7 @@
     <arg name="world_name" value="$(arg world_file)"/>
   </include>
 
-  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find asl_turtlebot)/robots/asl_turtlebot.urdf.xacro'" />
+  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find asl_turtlebot)/robots/asl_turtlebot2.urdf.xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
 
   <!-- Gazebo model spawner -->

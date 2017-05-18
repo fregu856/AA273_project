@@ -46,9 +46,9 @@ const karto::ScanSolver::IdPoseVector& SpaSolver::GetCorrections() const
 
 void SpaSolver::Compute()
 {
-	ros::Duration d = ros::Time::now() - mLastSPA;
-	if(d.toSec() > 5)
-	{
+	//ros::Duration d = ros::Time::now() - mLastSPA;
+	//if(d.toSec() > 5)
+	//{
 		std::cout << "Start of SpaSolver::Compute in SpaSolver.cpp\n";
 		corrections.Clear();
 		// typedef std::vector<Node2d, Eigen::aligned_allocator<Node2d> > NodeVector;
@@ -77,14 +77,20 @@ void SpaSolver::Compute()
 	  int id = 0;
 	  while (infile >> x >> y >> theta)
 	  {
+			//if (id > 0)
+			//{
+			std::cout << id << "\n";
 			karto::Pose2 pose(x, y, theta);
 			corrections.Add(karto::Pair<int, karto::Pose2>(id, pose));
+			//}
+
+    	++id;
 	  }
 
 		mLastSPA = ros::Time::now();
 		std::cout << "End of SpaSolver::Compute in SpaSolver.cpp\n";
 		////////// MODIFIED END
-	}
+	//}
 }
 
 void SpaSolver::reCompute()
