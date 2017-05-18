@@ -127,7 +127,11 @@ include_directories(
 add_executable(optimizer src/optimizer.cpp)  
 target_link_libraries(optimizer ${catkin_LIBRARIES})  
 - catkin_make  
-(then you can run it by "rosrun turtlebot_control optimizer")  
+(then you can run it by "rosrun turtlebot_control optimizer")    
+
+****
+
+To get a 360 LiDAR, I had to modify the maze5.world file in asl_turtlebot/worlds.  
 
 
 
