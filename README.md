@@ -133,5 +133,7 @@ target_link_libraries(optimizer ${catkin_LIBRARIES})
 
 To get a 360 LiDAR, I had to modify the maze5.world file in asl_turtlebot/worlds.  
 
+The LiDAR specs are taken directly from the Turtlebot 3 simulation files.
+
 
 
