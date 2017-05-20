@@ -6,7 +6,7 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "optimizer");
   ros::NodeHandle n;
 
-  ros::Rate loop_rate(0.1);
+  ros::Rate loop_rate(0.2);
 
   while (ros::ok())
   {
