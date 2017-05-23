@@ -515,6 +515,16 @@ nav2d_karto/SpaSolver.h
 -
 nav2d_karto/SpaSolver.h
 -
+OpenKarto/OpenMapper.h
+/home/fregu856/AA273/AA273_project/catkin_ws/src/navigation_2d/nav2d_karto/src/OpenKarto/OpenMapper.h
+Eigen/Eigen
+-
+iostream
+-
+fstream
+-
+stdlib.h
+-
 
 /home/fregu856/AA273/AA273_project/catkin_ws/src/navigation_2d/nav2d_karto/src/SpaSolver.cpp
 ros/console.h

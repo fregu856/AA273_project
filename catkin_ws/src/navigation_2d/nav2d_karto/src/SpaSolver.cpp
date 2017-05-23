@@ -116,6 +116,11 @@ void SpaSolver::AddNode(karto::Vertex<karto::LocalizedObjectPtr>* pVertex)
 	////////// MODIFIED END
 }
 
+void SpaSolver::AddNode2(Eigen::Vector3d vector, int id)
+{
+	m_Spa.addNode(vector, id);
+}
+
 void SpaSolver::AddConstraint(karto::Edge<karto::LocalizedObjectPtr>* pEdge)
 {
 	karto::LocalizedObjectPtr pSource = pEdge->GetSource()->GetVertexObject();
@@ -146,4 +151,9 @@ void SpaSolver::AddConstraint(karto::Edge<karto::LocalizedObjectPtr>* pEdge)
 	graph_file << " " << m(1,2) << " " << m(2,2) << "\n";
   graph_file.close();
 	////////// MODIFIED END
+}
+
+void SpaSolver::AddConstraint2(int source_id, int target_id, Eigen::Vector3d mean, Eigen::Matrix<double,3,3> m)
+{
+	m_Spa.addConstraint(source_id, target_id, mean, m);
 }

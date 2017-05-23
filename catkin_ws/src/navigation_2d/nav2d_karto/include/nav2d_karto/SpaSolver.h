@@ -45,7 +45,9 @@ public:
 	virtual const karto::ScanSolver::IdPoseVector& GetCorrections() const;
 
 	virtual void AddNode(karto::Vertex<karto::LocalizedObjectPtr>* pVertex);
+	virtual void AddNode2(Eigen::Vector3d vector, int id);
 	virtual void AddConstraint(karto::Edge<karto::LocalizedObjectPtr>* pEdge);
+	virtual void AddConstraint2(int source_id, int target_id, Eigen::Vector3d mean, Eigen::Matrix<double,3,3> m);
 
 	// Get the underlying graph from SBA
 	// return the graph of constraints

@@ -15,4 +15,4 @@ MinimumTravelDistance: 0.5
 MinimumTravelHeading: 1.6
 LoopMatchMinimumChainSize: 10
 LoopMatchMinimumResponseCoarse: 0.7
-LoopMatchMinimumResponseFine: 0.8
+LoopMatchMinimumResponseFine: 0.84
