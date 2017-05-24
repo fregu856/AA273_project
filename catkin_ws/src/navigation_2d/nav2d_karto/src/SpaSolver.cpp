@@ -93,6 +93,30 @@ void SpaSolver::Compute()
 	}
 }
 
+void SpaSolver::Compute2()
+{
+	std::cout << "Start of SpaSolver::Compute in SpaSolver.cpp\n";
+	corrections.Clear();
+	typedef std::vector<Node2d, Eigen::aligned_allocator<Node2d> > NodeVector;
+
+	ROS_INFO("Calling doSPA for loop closure");
+	m_Spa.doSPA(40);
+	ROS_INFO("Finished doSPA for loop closure");
+	NodeVector nodes = m_Spa.getNodes();
+
+	std::ofstream node_file;
+	node_file.open ("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/data/ais2klinik.txt", std::ios_base::app);
+
+	forEach(NodeVector, &nodes)
+	{
+		std::cout << "Adding line to solution file\n";
+	  node_file << iter->nodeId << " " << iter->trans(0);
+		node_file << " " << iter->trans(1) << " " << iter->arot << "\n";
+	}
+	node_file.close();
+	std::cout << "End of SpaSolver::Compute in SpaSolver.cpp\n";
+}
+
 void SpaSolver::reCompute()
 {
 	ros::Duration d = ros::Time::now() - mLastSPA;
@@ -118,6 +142,7 @@ void SpaSolver::AddNode(karto::Vertex<karto::LocalizedObjectPtr>* pVertex)
 
 void SpaSolver::AddNode2(Eigen::Vector3d vector, int id)
 {
+	std::cout << "AddNode2\n";
 	m_Spa.addNode(vector, id);
 }
 
@@ -155,5 +180,6 @@ void SpaSolver::AddConstraint(karto::Edge<karto::LocalizedObjectPtr>* pEdge)
 
 void SpaSolver::AddConstraint2(int source_id, int target_id, Eigen::Vector3d mean, Eigen::Matrix<double,3,3> m)
 {
+	std::cout << "AddConstraint2\n";
 	m_Spa.addConstraint(source_id, target_id, mean, m);
 }

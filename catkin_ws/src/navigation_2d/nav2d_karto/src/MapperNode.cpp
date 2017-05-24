@@ -22,10 +22,12 @@ int main(int argc, char **argv)
 	// Create a scan-solver
 	SpaSolver* solver = new SpaSolver();
 
-	std::ifstream infile("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/data/intel.g2o");
+	std::ifstream infile("/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/data/ais2klinik.g2o");
 	std::string line;
 	while (std::getline(infile, line))
 	{
+		std::cout << "Test\n";
+
 		std::stringstream linestream(line);
 		std::string type;
 		linestream >> type;
@@ -59,26 +61,11 @@ int main(int argc, char **argv)
 
 			solver->AddConstraint2(source_id, target_id, mean, m);
 		}
-
-		solver->Compute();
-
-
-
 	}
 
-
-	// // Create the MultiMapper
-	// MultiMapper mapper;
-	// mapper.setScanSolver(solver);
-	//
-	// // Start main loop
-	// ros::Rate publishRate(10);
-	// while(ros::ok())
-	// {
-	// 	mapper.publishTransform();
-	// 	ros::spinOnce();
-	// 	publishRate.sleep();
-	// }
+	std::cout << "Test before\n";
+	solver->Compute2();
+	std::cout << "Test after\n";
 
 	// Quit
 	return 0;

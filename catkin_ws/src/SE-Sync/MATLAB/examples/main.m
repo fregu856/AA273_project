@@ -33,7 +33,7 @@ ais = 'ais2klinik';
 
 
 % Pick the dataset to run here
-file = 'graph';
+file = 'ais2klinik';
 
 g2o_file = strcat(data_dir, file, '.g2o');
 
@@ -83,13 +83,29 @@ Y0 = vertcat(R, zeros(SE_Sync_opts.r0 - d, num_poses*d));
 %[SDPval, Yopt, xhat, Fxhat, se_sync_info, problem_data] = SE_Sync(measurements);
 
 %% Plot resulting solution
-plot_loop_closures = true;
 
-if plot_loop_closures
-    plot_poses(xhat.t, xhat.R, measurements.edges, '-b', .25);
-else
-    plot_poses(xhat.t, xhat.R);
-end
-axis tight;
+plot_poses(xhat.t, xhat.R);
 
 %view(90, -90);  % For plotting 3D but nearly-planar datasets
+
+%%
+
+fid = fopen('/home/fregu856/AA273/AA273_project/catkin_ws/src/SE-Sync/data/ais2klinik.txt', 'r');
+read_line = fgets(fid);  % Read the next line from the file
+xhat_SPA_t = zeros(2, 100000);
+
+while ischar(read_line)  % As long as this line is a valid character string
+
+    token = strtok(read_line);
+
+    [node_id, x, y, theta] = strread(read_line, '%d %f %f %f');
+
+    xhat_SPA_t(:, node_id+1) = [x; y];
+
+    read_line = fgets(fid);
+end
+
+hold on;
+plot(xhat_SPA_t(1, :), xhat_SPA_t(2,:), 'r');
+legend('show');
+legend('SE-Sync', 'SPA')

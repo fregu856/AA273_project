@@ -42,6 +42,7 @@ public:
 public:
 	virtual void Clear();
 	virtual void Compute();
+	virtual void Compute2();
 	virtual const karto::ScanSolver::IdPoseVector& GetCorrections() const;
 
 	virtual void AddNode(karto::Vertex<karto::LocalizedObjectPtr>* pVertex);
